@@ -27,6 +27,6 @@ public class HomeController {
 	}
 	
 	@Get
-	public void usuarios () {
+	public void usuario () {
 	}
 }

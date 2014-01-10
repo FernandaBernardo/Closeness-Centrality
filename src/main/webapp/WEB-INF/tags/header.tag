@@ -15,7 +15,7 @@
 <body>
 	<nav class="menu">
 		<a href="<c:url value="/home/home" />">Início</a> 
-		<a href="<c:url value="/home/usuarios" />">Usuários</a>
+		<a href="<c:url value="/home/usuario" />">Usuários</a>
 		<a href="<c:url value="/home/cadastros" />">Cadastros</a>
 		<a href="<c:url value="/home/emprestimos" />">Empréstimos</a>
 		<a href="<c:url value="/home/consultas" />">Consultas</a>
