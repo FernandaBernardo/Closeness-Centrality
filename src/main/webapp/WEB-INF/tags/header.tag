@@ -14,9 +14,9 @@
 	
 <body>
 	<nav class="menu">
-		<a href="/biblioteca/home">Início</a> 
-		<a href="/biblioteca/usuarios">Usuários</a>
-		<a href="/biblioteca/cadastros">Cadastros</a>
-		<a href="/biblioteca/emprestimos">Empréstimos</a>
-		<a href="/biblioteca/consultas">Consultas</a>
+		<a href="<c:url value="/home/home" />">Início</a> 
+		<a href="<c:url value="/home/usuarios" />">Usuários</a>
+		<a href="<c:url value="/home/cadastros" />">Cadastros</a>
+		<a href="<c:url value="/home/emprestimos" />">Empréstimos</a>
+		<a href="<c:url value="/home/consultas" />">Consultas</a>
 	</nav>
