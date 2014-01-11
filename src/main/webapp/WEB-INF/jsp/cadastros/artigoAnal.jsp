@@ -1,13 +1,12 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 
 <tags:header secao="cadastroArtigoAnaisConferencia"/>
 <tags:menuCadastro />
 <nav class="corpo">
 	 <form action="<c:url value="/cadastros/adicionaArtigoAnal" />" method="POST">
-	 	<tags:cadastroPublicacao tipo="artigoAnal"/>
-		Artigos: <input type="text" name="artigoAnal.artigos"size="50"><br>
-		Editora: <input type="text" name="artigoAnal.editora"size="50"><br>
-		Número do Volume: <input type="text" name="artigoAnal.numeroVolume"size="50"><br><br>
+	 	<tags:cadastroPublicacao />
+		Anal de Conferência: <input type="text" name="anal"size="50"><br>
 		
 		<input type="submit" value="Salvar"size="50">
 	</form>

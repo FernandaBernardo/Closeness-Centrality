@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.hibernate.Session;
 
+import biblioteca.model.AnaisConferencia;
 import biblioteca.model.Biblioteca;
 import biblioteca.model.Livro;
 import biblioteca.model.Periodico;
@@ -50,6 +51,11 @@ public class PublicacaoDao{
 
 	public Periodico buscaPeriodico(String periodico) {
 		Periodico result = (Periodico)session.createQuery("from Periodico p where p.titulo=:titulo").setString("titulo", periodico).uniqueResult();
+		return result;
+	}
+
+	public AnaisConferencia buscaAnaisConferencia(String anal) {
+		AnaisConferencia result = (AnaisConferencia)session.createQuery("from AnaisConferencia ac where ac.titulo=:titulo").setString("titulo", anal).uniqueResult();
 		return result;
 	}
 }

@@ -172,8 +172,20 @@ public class CadastrosController {
 	}
 	
 	@Post
-	public void adicionaArtigoAnal(ArtigoAnal artigoAnal) {
+	public void adicionaArtigoAnal(String titulo, String data, String local, String biblioteca, String secao, String edicao,
+			String anal) throws ParseException {
+		ArtigoAnal artigoAnal = new ArtigoAnal();
+		artigoAnal.setTitulo(titulo);
+		artigoAnal.setData(parseData(data));
+		artigoAnal.setLocal(local);
+		artigoAnal.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		artigoAnal.setSecao(dao.buscaSecao(secao));
+		artigoAnal.setEdicao(Integer.parseInt(edicao));
+		artigoAnal.setAnaisConferencia(dao.buscaAnaisConferencia(anal));
+		
 		dao.adiciona(artigoAnal);
+		
+		result.include("tituloArtigoAnal", artigoAnal.getTitulo());
 	}
 	
 	private Calendar parseData(String data) throws ParseException {
