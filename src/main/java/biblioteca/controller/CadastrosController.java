@@ -60,7 +60,6 @@ public class CadastrosController {
 	public void adicionaMonografia(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 			String autores, String nomeInstituicao, String numeroMonografia) throws ParseException {
 		Monografia monografia = new Monografia();
-		System.out.println("Oieeee " + titulo + " " + nomeInstituicao + " " + numeroMonografia);
 		monografia.setTitulo(titulo);
 		monografia.setData(parseData(data));
 		monografia.setLocal(local);
@@ -82,8 +81,22 @@ public class CadastrosController {
 	}
 	
 	@Post
-	public void adicionaPeriodico(Periodico periodico) {
+	public void adicionaPeriodico(String titulo, String data, String local, String biblioteca, String secao, String edicao,
+			String editora) throws ParseException {
+		Periodico periodico = new Periodico();
+		periodico.setTitulo(titulo);
+		periodico.setData(parseData(data));
+		periodico.setLocal(local);
+		periodico.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		periodico.setSecao(dao.buscaSecao(secao));
+		periodico.setEdicao(Integer.parseInt(edicao));
+		periodico.setEditora(editora);
+
+		//VER AUTORES
+		
 		dao.adiciona(periodico);
+		
+		result.include("tituloPeriodico", periodico.getTitulo());
 	}
 	
 	@Get
