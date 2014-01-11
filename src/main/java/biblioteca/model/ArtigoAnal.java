@@ -1,5 +1,6 @@
 package biblioteca.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +12,7 @@ public class ArtigoAnal {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id; //ADICIONEI ID, VERIFICAR SE CORRETO
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private AnaisConferencia anaisConferencia;
 	private int volume;
 

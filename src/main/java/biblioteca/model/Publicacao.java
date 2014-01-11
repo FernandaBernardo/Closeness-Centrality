@@ -2,6 +2,7 @@ package biblioteca.model;
 
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,10 +28,10 @@ public abstract class Publicacao {
 	
 	private String local;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Biblioteca biblioteca;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Secao secao;
 	
 	public int getId() {

@@ -12,6 +12,20 @@
 		<property name="show_sql">false</property>
 		<property name="format_sql">false</property>
 		
+		<mapping class="biblioteca.model.AnaisConferencia"/>
+		<mapping class="biblioteca.model.Artigo"/>
+		<mapping class="biblioteca.model.ArtigoAnal"/>
+		<mapping class="biblioteca.model.ArtigoLivro"/>
+		<mapping class="biblioteca.model.ArtigoPeriodico"/>
+		<mapping class="biblioteca.model.Autor"/>
+		<mapping class="biblioteca.model.Biblioteca"/>
+		<mapping class="biblioteca.model.Edicao"/>
+		<mapping class="biblioteca.model.Emprestimo"/>
+		<mapping class="biblioteca.model.Livro"/>
+		<mapping class="biblioteca.model.Monografia"/>
+		<mapping class="biblioteca.model.Periodico"/>
+		<mapping class="biblioteca.model.Pessoa"/>
+		<mapping class="biblioteca.model.Secao"/>
 		<mapping class="biblioteca.model.Usuario"/>
 	</session-factory>
 </hibernate-configuration>

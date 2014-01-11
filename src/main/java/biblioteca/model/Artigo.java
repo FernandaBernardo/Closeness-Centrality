@@ -3,6 +3,7 @@ package biblioteca.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -11,7 +12,7 @@ import javax.persistence.OneToMany;
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Artigo extends Publicacao{
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private List<Autor> autores;
 	private String editora;
 	private int paginaInicial;

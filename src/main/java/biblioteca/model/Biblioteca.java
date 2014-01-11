@@ -2,6 +2,7 @@ package biblioteca.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +15,7 @@ public class Biblioteca {
 	private int id;
 	private String nome;
 	private String endereco;
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private List<Secao> secoes;
 
 	public int getId() {

@@ -6,17 +6,11 @@ import javax.inject.Inject;
 
 import org.hibernate.Session;
 
-import biblioteca.model.Livro;
 import biblioteca.model.Publicacao;
 
-public class PublicacaoDao {
+public class PublicacaoDao{
 
-//	@Inject 
-	private Session session;
-
-	public void adicionaLivro(Livro livro) {
-		session.save(livro);
-	}
+	@Inject private Session session;
 
 	public void adiciona(Publicacao publicacao) {
 		session.save(publicacao);
