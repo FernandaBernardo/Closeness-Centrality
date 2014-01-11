@@ -44,6 +44,8 @@ public class CadastrosController {
 		livro.setEditora(editora);
 		livro.setNumeroPaginas(Integer.parseInt(numeroPaginas));
 		
+		//VER AUTORES
+		
 		dao.adiciona(livro);
 		
 		result.include("tituloLivro", livro.getTitulo());
@@ -55,8 +57,24 @@ public class CadastrosController {
 	}
 	
 	@Post
-	public void adicionaMonografia(Monografia monografia) {
+	public void adicionaMonografia(String titulo, String data, String local, String biblioteca, String secao, String edicao,
+			String autores, String nomeInstituicao, String numeroMonografia) throws ParseException {
+		Monografia monografia = new Monografia();
+		System.out.println("Oieeee " + titulo + " " + nomeInstituicao + " " + numeroMonografia);
+		monografia.setTitulo(titulo);
+		monografia.setData(parseData(data));
+		monografia.setLocal(local);
+		monografia.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		monografia.setSecao(dao.buscaSecao(secao));
+		monografia.setEdicao(Integer.parseInt(edicao));
+		monografia.setNomeInstituicao(nomeInstituicao);
+		monografia.setNumeroMonografia(Integer.parseInt(numeroMonografia));
+
+		//VER AUTORES
+		
 		dao.adiciona(monografia);
+		
+		result.include("tituloMonografia", monografia.getTitulo());
 	}
 	
 	@Get
