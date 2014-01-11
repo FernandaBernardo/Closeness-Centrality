@@ -14,7 +14,6 @@ public class Livro extends Publicacao{
 	@OneToMany(cascade = {CascadeType.ALL})
 	private List<Autor> autores;
 	private String tituloOriginal; //opcional
-	private int numeroEdicao;
 	private String editora;
 	private int numeroPaginas; //opcional
 	
@@ -29,12 +28,6 @@ public class Livro extends Publicacao{
 	}
 	public void setTituloOriginal(String tituloOriginal) {
 		this.tituloOriginal = tituloOriginal;
-	}
-	public int getNumeroEdicao() {
-		return numeroEdicao;
-	}
-	public void setNumeroEdicao(int numeroEdicao) {
-		this.numeroEdicao = numeroEdicao;
 	}
 	public String getEditora() {
 		return editora;

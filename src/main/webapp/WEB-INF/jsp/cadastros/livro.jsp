@@ -8,7 +8,6 @@
 	 	<tags:cadastroPublicacao />
 		Autores: <input type="text" name="autores"size="50"><br>
 		Título Original: <input type="text" name="tituloOriginal"size="50"><br>
-		Número da Edição: <input type="text" name="numeroEdicao"size="50"><br>
 		Editora: <input type="text" name="editora"size="50"><br>
 		Número de Páginas: <input type="text" name="numeroPaginas"size="50"><br><br>
 		

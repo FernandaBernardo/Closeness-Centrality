@@ -32,15 +32,15 @@ public class CadastrosController {
 	
 	@Post
 	public void adicionaLivro(String titulo, String data, String local, String biblioteca, String secao, String edicao,
-		String autores, String tituloOriginal, String numeroEdicao, String editora, String numeroPaginas) throws ParseException {
+		String autores, String tituloOriginal, String editora, String numeroPaginas) throws ParseException {
 		Livro livro = new Livro();
 		livro.setTitulo(titulo);
 		livro.setData(parseData(data));
 		livro.setLocal(local);
 		livro.setBiblioteca(dao.buscaBiblioteca(biblioteca));
 		livro.setSecao(dao.buscaSecao(secao));
+		livro.setEdicao(Integer.parseInt(edicao));
 		livro.setTituloOriginal(tituloOriginal);
-		livro.setNumeroEdicao(Integer.parseInt(numeroEdicao));
 		livro.setEditora(editora);
 		livro.setNumeroPaginas(Integer.parseInt(numeroPaginas));
 		
@@ -128,8 +128,21 @@ public class CadastrosController {
 	}
 	
 	@Post
-	public void adicionaArtigoLivro(ArtigoLivro artigoLivro) {
+	public void adicionaArtigoLivro(String titulo, String data, String local, String biblioteca, String secao, String edicao,
+			String livro, String numeroCapitulo) throws ParseException {
+		ArtigoLivro artigoLivro = new ArtigoLivro();
+		artigoLivro.setTitulo(titulo);
+		artigoLivro.setData(parseData(data));
+		artigoLivro.setLocal(local);
+		artigoLivro.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		artigoLivro.setSecao(dao.buscaSecao(secao));
+		artigoLivro.setEdicao(Integer.parseInt(edicao));
+		artigoLivro.setLivro(dao.buscaLivro(livro));
+		artigoLivro.setNumCapitulo(Integer.parseInt(numeroCapitulo));
+		
 		dao.adiciona(artigoLivro);
+		
+		result.include("tituloArtigoLivro", artigoLivro.getTitulo());
 	}
 	
 	@Get
@@ -137,8 +150,21 @@ public class CadastrosController {
 	}
 	
 	@Post
-	public void adicionaArtigoPeriodico(ArtigoPeriodico artigoPeriodico) {
+	public void adicionaArtigoPeriodico(String titulo, String data, String local, String biblioteca, String secao, String edicao,
+			String periodico, String volume) throws ParseException {
+		ArtigoPeriodico artigoPeriodico = new ArtigoPeriodico();
+		artigoPeriodico.setTitulo(titulo);
+		artigoPeriodico.setData(parseData(data));
+		artigoPeriodico.setLocal(local);
+		artigoPeriodico.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		artigoPeriodico.setSecao(dao.buscaSecao(secao));
+		artigoPeriodico.setEdicao(Integer.parseInt(edicao));
+		artigoPeriodico.setPeriodico(dao.buscaPeriodico(periodico));
+		artigoPeriodico.setVolume(Integer.parseInt(volume));
+		
 		dao.adiciona(artigoPeriodico);
+		
+		result.include("tituloArtigoPeriodico", artigoPeriodico.getTitulo());
 	}
 	
 	@Get

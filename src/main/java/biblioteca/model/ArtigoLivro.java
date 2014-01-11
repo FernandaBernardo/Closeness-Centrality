@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 public class ArtigoLivro extends Publicacao{
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Livro livro;
+	
+	private int numCapitulo;
 
 	public Livro getLivro() {
 		return livro;
@@ -18,5 +20,13 @@ public class ArtigoLivro extends Publicacao{
 
 	public void setLivro(Livro livro) {
 		this.livro = livro;
+	}
+
+	public int getNumCapitulo() {
+		return numCapitulo;
+	}
+
+	public void setNumCapitulo(int numCapitulo) {
+		this.numCapitulo = numCapitulo;
 	}
 }
