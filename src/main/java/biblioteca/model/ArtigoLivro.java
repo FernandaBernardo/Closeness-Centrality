@@ -2,17 +2,13 @@ package biblioteca.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 
 @Entity
-public class ArtigoLivro {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	int id; //ADICIONEI ID, VERIFICAR SE CORRETO
-	
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class ArtigoLivro extends Publicacao{
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Livro livro;
 

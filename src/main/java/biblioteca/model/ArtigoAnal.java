@@ -2,23 +2,17 @@ package biblioteca.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 
 @Entity
-public class ArtigoAnal {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id; //ADICIONEI ID, VERIFICAR SE CORRETO
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class ArtigoAnal extends Publicacao{
 	@OneToOne(cascade = {CascadeType.ALL})
 	private AnaisConferencia anaisConferencia;
 	private int volume;
 
-	public int getId() {
-		return id;
-	}
 	public AnaisConferencia getAnaisConferencia() {
 		return anaisConferencia;
 	}

@@ -1,6 +1,9 @@
 package biblioteca.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -34,6 +37,8 @@ public abstract class Publicacao {
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Secao secao;
 	
+	private int edicao;
+	
 	public int getId() {
 		return id;
 	}
@@ -66,5 +71,11 @@ public abstract class Publicacao {
 	}
 	public void setSecao(Secao secao) {
 		this.secao = secao;
+	}
+	public int getEdicao() {
+		return edicao;
+	}
+	public void setEdicao(int edicao) {
+		this.edicao = edicao;
 	}
 }

@@ -1,29 +1,54 @@
 package biblioteca.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.inject.Inject;
 
 import biblioteca.dao.PublicacaoDao;
 import biblioteca.model.AnaisConferencia;
+import biblioteca.model.ArtigoAnal;
+import biblioteca.model.ArtigoLivro;
+import biblioteca.model.ArtigoPeriodico;
 import biblioteca.model.Livro;
 import biblioteca.model.Monografia;
 import biblioteca.model.Periodico;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.Result;
 
 @Controller
 public class CadastrosController {
 	
 	@Inject private PublicacaoDao dao;
+	@Inject private Result result;
 
 	@Get
 	public void livro() {
 	}
 	
 	@Post
-	public void adicionaLivro(Livro livro) {
+	public void adicionaLivro(String titulo, String data, String local, String biblioteca, String secao, String edicao,
+		String autores, String tituloOriginal, String numeroEdicao, String editora, String numeroPaginas) throws ParseException {
+		Livro livro = new Livro();
+		livro.setTitulo(titulo);
+		livro.setData(parseData(data));
+		livro.setLocal(local);
+		livro.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		livro.setSecao(dao.buscaSecao(secao));
+		livro.setTituloOriginal(tituloOriginal);
+		livro.setNumeroEdicao(Integer.parseInt(numeroEdicao));
+		livro.setEditora(editora);
+		livro.setNumeroPaginas(Integer.parseInt(numeroPaginas));
+		
 		dao.adiciona(livro);
+		
+		result.include("tituloLivro", livro.getTitulo());
 	}
+
 	
 	@Get
 	public void monografia() {
@@ -56,26 +81,32 @@ public class CadastrosController {
 	public void artigoLivro() {
 	}
 	
-//	@Post
-//	public void adicionaArtigoLivro(ArtigoLivro artigoLivro) {
-//		dao.adiciona(artigoLivro);
-//	}
+	@Post
+	public void adicionaArtigoLivro(ArtigoLivro artigoLivro) {
+		dao.adiciona(artigoLivro);
+	}
 	
 	@Get
 	public void artigoPeriodico() {
 	}
 	
-//	@Post
-//	public void adicionaArtigoPeriodico(ArtigoPeriodico artigoPeriodico) {
-//		dao.adiciona(artigoPeriodico);
-//	}
+	@Post
+	public void adicionaArtigoPeriodico(ArtigoPeriodico artigoPeriodico) {
+		dao.adiciona(artigoPeriodico);
+	}
 	
 	@Get
 	public void artigoAnal() {
 	}
 	
-//	@Post
-//	public void adicionaArtigoAnal(ArtigoAnaisConferencia artigoAnaisConferencia) {
-//		dao.adiciona(aritogAnaisConferencia);
-//	}
+	@Post
+	public void adicionaArtigoAnal(ArtigoAnal artigoAnal) {
+		dao.adiciona(artigoAnal);
+	}
+	
+	private Calendar parseData(String data) throws ParseException {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime((Date) new SimpleDateFormat("dd/MM/yyyy").parse(data));
+		return cal;
+	}
 }
