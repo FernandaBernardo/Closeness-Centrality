@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario extends Pessoa{
 	private String cpf;
+	private String telefone;
 	@OneToMany(cascade = {CascadeType.ALL})
 	private List<Emprestimo> emprestimos;
 	
@@ -21,10 +22,16 @@ public class Usuario extends Pessoa{
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-//	public List<Emprestimo> getEmprestimos() {
-//		return emprestimos;
-//	}
-//	public void setEmprestimos(List<Emprestimo> emprestimos) {
-//		this.emprestimos = emprestimos;
-//	}
+	public List<Emprestimo> getEmprestimos() {
+		return emprestimos;
+	}
+	public void setEmprestimos(List<Emprestimo> emprestimos) {
+		this.emprestimos = emprestimos;
+	}
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 }

@@ -5,10 +5,13 @@
 
 <tags:menuUsuarios />
 
-<form action="<c:url value="/usuario/adiciona" />" method="POST">
-	Nome: <input type="text" name="usuario.nome" /><br> 
-	CPF: <input type="text"	name="usuario.cpf" /><br> 
-	<input type="submit" value="Gravar" />
-</form>
+<nav class="corpo">
+	<form action="<c:url value="/usuario/adiciona" />" method="POST">
+		Nome: <input type="text" name="usuario.nome" /><br> 
+		CPF: <input type="text"	name="usuario.cpf" /><br>
+		Telefone: <input type="text" name="usuario.telefone" /><br><br>
+		<input type="submit" value="Salvar" />
+	</form>
+</nav>
 
 <tags:footer />
