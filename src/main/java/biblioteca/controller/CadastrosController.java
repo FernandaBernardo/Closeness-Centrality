@@ -104,8 +104,23 @@ public class CadastrosController {
 	}
 	
 	@Post
-	public void adicionaAnaisConferencia(AnaisConferencia anaisConferencia) {
-		dao.adiciona(anaisConferencia);
+	public void adicionaAnaisConferencia(String titulo, String data, String local, String biblioteca, String secao, String edicao,
+			String artigos, String editora, String numeroVolume) throws ParseException {
+		AnaisConferencia anal = new AnaisConferencia();
+		anal.setTitulo(titulo);
+		anal.setData(parseData(data));
+		anal.setLocal(local);
+		anal.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		anal.setSecao(dao.buscaSecao(secao));
+		anal.setEdicao(Integer.parseInt(edicao));
+		anal.setEditora(editora);
+		anal.setNumeroVolume(Integer.parseInt(numeroVolume));
+
+		//VER ARTIGOS
+		
+		dao.adiciona(anal);
+		
+		result.include("tituloAnal", anal.getTitulo());
 	}
 	
 	@Get
