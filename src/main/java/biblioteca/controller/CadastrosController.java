@@ -207,6 +207,8 @@ public class CadastrosController {
 	@Post
 	public void adicionaBiblioteca(String nome, String endereco) {
 		Biblioteca biblioteca = new Biblioteca();
+		biblioteca.setNome(nome);
+		biblioteca.setEndereco(endereco);
 		
 		bibliotecadDao.adiciona(biblioteca);
 		
@@ -220,6 +222,7 @@ public class CadastrosController {
 	@Post
 	public void adicionaSecao(String nome) {
 		Secao secao = new Secao();
+		secao.setNome(nome);
 		
 		secaoDao.adiciona(secao);
 		
@@ -233,6 +236,7 @@ public class CadastrosController {
 	@Post
 	public void adicionaAutor(String nome) {
 		Autor autor = new Autor();
+		autor.setNome(nome);
 		
 		pessoaDao.adicionaAutor(autor);
 		
