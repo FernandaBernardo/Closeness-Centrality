@@ -24,4 +24,21 @@ public class UsuarioController {
 		dao.adiciona(usuario);
 		result.include("nome", usuario.getNome());
 	}
+	
+	@Get
+	public void busca(){
+	}
+	
+	@Post
+	public void altera(String nome) {
+		Usuario usuario= dao.busca(nome);
+		result.include("nome", usuario.getNome());
+		result.include("cpf", usuario.getCpf());
+		result.include("telefone", usuario.getTelefone());
+	}
+	
+	@Post
+	public void atualiza(String nomeAntigo, String nome, String cpf, String telefone) {
+		dao.atualiza(nomeAntigo, nome, cpf, telefone);
+	}
 }

@@ -11,10 +11,6 @@ public class HomeController {
 	}
 	
 	@Get
-	public void adicionar () {
-	}
-	
-	@Get
 	public void cadastros() {
 	}
 	
