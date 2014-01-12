@@ -12,6 +12,8 @@ public class ArtigoAnal extends Publicacao{
 	@OneToOne(cascade = {CascadeType.ALL})
 	private AnaisConferencia anaisConferencia;
 	private int volume;
+	private int paginaInicial;
+	private int paginaFinal;
 
 	public AnaisConferencia getAnaisConferencia() {
 		return anaisConferencia;
@@ -24,5 +26,17 @@ public class ArtigoAnal extends Publicacao{
 	}
 	public void setVolume(int volume) {
 		this.volume = volume;
+	}
+	public int getPaginaInicial() {
+		return paginaInicial;
+	}
+	public void setPaginaInicial(int paginaInicial) {
+		this.paginaInicial = paginaInicial;
+	}
+	public int getPaginaFinal() {
+		return paginaFinal;
+	}
+	public void setPaginaFinal(int paginaFinal) {
+		this.paginaFinal = paginaFinal;
 	}
 }

@@ -1,5 +1,6 @@
 package biblioteca.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,6 +8,7 @@ import javax.inject.Inject;
 import org.hibernate.Session;
 
 import biblioteca.model.AnaisConferencia;
+import biblioteca.model.Autor;
 import biblioteca.model.Biblioteca;
 import biblioteca.model.Livro;
 import biblioteca.model.Periodico;
@@ -57,5 +59,16 @@ public class PublicacaoDao{
 	public AnaisConferencia buscaAnaisConferencia(String anal) {
 		AnaisConferencia result = (AnaisConferencia)session.createQuery("from AnaisConferencia ac where ac.titulo=:titulo").setString("titulo", anal).uniqueResult();
 		return result;
+	}
+
+	public List<Autor> buscaAutores(String autores) {
+		String[] autor = autores.split(",");
+		List<Autor> autoresEncontrados = new ArrayList();
+		
+		for (String aux : autor) {
+			autoresEncontrados.addAll(session.createQuery("from Autor a where a.nome =:nome").setString("nome", aux).list());
+		}
+		
+		return autoresEncontrados;
 	}
 }

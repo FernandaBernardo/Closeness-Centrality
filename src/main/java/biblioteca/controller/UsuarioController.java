@@ -2,7 +2,7 @@ package biblioteca.controller;
 
 import javax.inject.Inject;
 
-import biblioteca.dao.UsuarioDao;
+import biblioteca.dao.PessoaDao;
 import biblioteca.model.Usuario;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
@@ -12,7 +12,7 @@ import br.com.caelum.vraptor.Result;
 @Controller
 public class UsuarioController {
 	
-	@Inject private UsuarioDao dao;
+	@Inject private PessoaDao dao;
 	@Inject private Result result;
 	
 	@Get
@@ -21,7 +21,7 @@ public class UsuarioController {
 	
 	@Post
 	public void adiciona(Usuario usuario){
-		dao.adiciona(usuario);
+		dao.adicionaUsuario(usuario);
 		result.include("nome", usuario.getNome());
 	}
 	
@@ -39,6 +39,10 @@ public class UsuarioController {
 	
 	@Post
 	public void atualiza(String nomeAntigo, String nome, String cpf, String telefone) {
-		dao.atualiza(nomeAntigo, nome, cpf, telefone);
+		Usuario usuario = dao.busca(nomeAntigo);
+		usuario.setNome(nome);
+		usuario.setCpf(cpf);
+		usuario.setTelefone(telefone);
+		dao.atualiza(usuario);
 	}
 }

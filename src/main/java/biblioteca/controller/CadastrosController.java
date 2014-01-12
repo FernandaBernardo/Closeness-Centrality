@@ -7,14 +7,20 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import biblioteca.dao.BibliotecaDao;
+import biblioteca.dao.PessoaDao;
 import biblioteca.dao.PublicacaoDao;
+import biblioteca.dao.SecaoDao;
 import biblioteca.model.AnaisConferencia;
 import biblioteca.model.ArtigoAnal;
 import biblioteca.model.ArtigoLivro;
 import biblioteca.model.ArtigoPeriodico;
+import biblioteca.model.Autor;
+import biblioteca.model.Biblioteca;
 import biblioteca.model.Livro;
 import biblioteca.model.Monografia;
 import biblioteca.model.Periodico;
+import biblioteca.model.Secao;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
@@ -25,6 +31,9 @@ public class CadastrosController {
 	
 	@Inject private PublicacaoDao dao;
 	@Inject private Result result;
+	@Inject private BibliotecaDao bibliotecadDao;
+	@Inject private SecaoDao secaoDao;
+	@Inject private PessoaDao pessoaDao;
 
 	@Get
 	public void livro() {
@@ -43,8 +52,7 @@ public class CadastrosController {
 		livro.setTituloOriginal(tituloOriginal);
 		livro.setEditora(editora);
 		livro.setNumeroPaginas(Integer.parseInt(numeroPaginas));
-		
-		//VER AUTORES
+		livro.setAutores(dao.buscaAutores(autores));
 		
 		dao.adiciona(livro);
 		
@@ -151,7 +159,7 @@ public class CadastrosController {
 	
 	@Post
 	public void adicionaArtigoPeriodico(String titulo, String data, String local, String biblioteca, String secao, String edicao,
-			String periodico, String volume) throws ParseException {
+			String periodico, String volume, String paginaInicial, String paginaFinal) throws ParseException {
 		ArtigoPeriodico artigoPeriodico = new ArtigoPeriodico();
 		artigoPeriodico.setTitulo(titulo);
 		artigoPeriodico.setData(parseData(data));
@@ -161,6 +169,8 @@ public class CadastrosController {
 		artigoPeriodico.setEdicao(Integer.parseInt(edicao));
 		artigoPeriodico.setPeriodico(dao.buscaPeriodico(periodico));
 		artigoPeriodico.setVolume(Integer.parseInt(volume));
+		artigoPeriodico.setPaginaInicial(Integer.parseInt(paginaInicial));
+		artigoPeriodico.setPaginaFinal(Integer.parseInt(paginaFinal));
 		
 		dao.adiciona(artigoPeriodico);
 		
@@ -173,7 +183,7 @@ public class CadastrosController {
 	
 	@Post
 	public void adicionaArtigoAnal(String titulo, String data, String local, String biblioteca, String secao, String edicao,
-			String anal) throws ParseException {
+			String anal, String paginaInicial, String paginaFinal) throws ParseException {
 		ArtigoAnal artigoAnal = new ArtigoAnal();
 		artigoAnal.setTitulo(titulo);
 		artigoAnal.setData(parseData(data));
@@ -182,12 +192,53 @@ public class CadastrosController {
 		artigoAnal.setSecao(dao.buscaSecao(secao));
 		artigoAnal.setEdicao(Integer.parseInt(edicao));
 		artigoAnal.setAnaisConferencia(dao.buscaAnaisConferencia(anal));
+		artigoAnal.setPaginaInicial(Integer.parseInt(paginaInicial));
+		artigoAnal.setPaginaFinal(Integer.parseInt(paginaFinal));
 		
 		dao.adiciona(artigoAnal);
 		
 		result.include("tituloArtigoAnal", artigoAnal.getTitulo());
 	}
 	
+	@Get
+	public void biblioteca() {
+	}
+	
+	@Post
+	public void adicionaBiblioteca(String nome, String endereco) {
+		Biblioteca biblioteca = new Biblioteca();
+		
+		bibliotecadDao.adiciona(biblioteca);
+		
+		result.include("tituloBiblioteca", biblioteca.getNome());
+	}
+
+	@Get
+	public void secao() {
+	}
+	
+	@Post
+	public void adicionaSecao(String nome) {
+		Secao secao = new Secao();
+		
+		secaoDao.adiciona(secao);
+		
+		result.include("tituloSecao", secao.getNome());
+	}
+
+	@Get
+	public void autor() {
+	}
+	
+	@Post
+	public void adicionaAutor(String nome) {
+		Autor autor = new Autor();
+		
+		pessoaDao.adicionaAutor(autor);
+		
+		result.include("tituloAutor", autor.getNome());
+	}
+
 	private Calendar parseData(String data) throws ParseException {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime((Date) new SimpleDateFormat("dd/MM/yyyy").parse(data));
