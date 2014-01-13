@@ -203,17 +203,6 @@ public class CadastrosController {
 	@Get
 	public void biblioteca() {
 	}
-	
-	@Post
-	public void adicionaBiblioteca(String nome, String endereco) {
-		Biblioteca biblioteca = new Biblioteca();
-		biblioteca.setNome(nome);
-		biblioteca.setEndereco(endereco);
-		
-		bibliotecadDao.adiciona(biblioteca);
-		
-		result.include("tituloBiblioteca", biblioteca.getNome());
-	}
 
 	@Get
 	public void secao() {

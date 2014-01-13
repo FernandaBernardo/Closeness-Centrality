@@ -6,7 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Biblioteca {
@@ -15,7 +15,7 @@ public class Biblioteca {
 	private int id;
 	private String nome;
 	private String endereco;
-	@OneToMany(cascade = {CascadeType.ALL})
+	@ManyToMany(cascade = {CascadeType.ALL})
 	private List<Secao> secoes;
 
 	public int getId() {
@@ -44,5 +44,9 @@ public class Biblioteca {
 
 	public void setSecoes(List<Secao> secoes) {
 		this.secoes = secoes;
+	}
+
+	public void addSecao(Secao s) {
+		this.secoes.add(s);
 	}
 }

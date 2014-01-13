@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Secao {
@@ -15,7 +15,7 @@ public class Secao {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String nome;
-	@OneToMany(cascade = {CascadeType.ALL})
+	@ManyToMany(cascade = {CascadeType.ALL})
 	private List<Publicacao> publicacoes;
 	
 	public int getId() {
