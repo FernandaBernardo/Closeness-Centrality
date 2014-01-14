@@ -71,4 +71,16 @@ public class PublicacaoDao{
 		
 		return autoresEncontrados;
 	}
+
+	public List<Publicacao> buscaTodasPublicacoes() {
+		return session.createQuery("from Publicacao").list();
+	}
+	
+	public List<Publicacao> buscaPublicacoesGenerico(String clazz) {
+		return session.createQuery("from " + clazz).list();
+	}
+
+	public Publicacao buscaId(Long id) {
+		return (Publicacao) session.createQuery("from Publicacao where id=:id").setLong("id", id).uniqueResult();
+	}
 }

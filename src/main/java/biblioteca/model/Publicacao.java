@@ -1,9 +1,6 @@
 package biblioteca.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

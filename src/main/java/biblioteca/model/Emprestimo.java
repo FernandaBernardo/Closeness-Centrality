@@ -1,14 +1,13 @@
 package biblioteca.model;
 
 import java.util.Calendar;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,10 +21,10 @@ public class Emprestimo {
 	private Calendar dataRetirada;
 	@Temporal(TemporalType.DATE)
 	private Calendar dataDevolucao;
-	@OneToOne(cascade = {CascadeType.ALL})
+	@ManyToOne(cascade = {CascadeType.ALL})
 	private Usuario usuario;
-	@OneToMany(cascade = {CascadeType.ALL})
-	private List<Publicacao> emprestimos;
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Publicacao publicacao;
 
 	public int getId() {
 		return id;
@@ -55,11 +54,11 @@ public class Emprestimo {
 		this.usuario = usuario;
 	}
 
-	public List<Publicacao> getEmprestimos() {
-		return emprestimos;
+	public Publicacao getPublicacao() {
+		return publicacao;
 	}
 
-	public void setEmprestimos(List<Publicacao> emprestimos) {
-		this.emprestimos = emprestimos;
+	public void setPublicacao(Publicacao publicacao) {
+		this.publicacao = publicacao;
 	}
 }

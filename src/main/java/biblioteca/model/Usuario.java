@@ -25,6 +25,9 @@ public class Usuario extends Pessoa{
 	public List<Emprestimo> getEmprestimos() {
 		return emprestimos;
 	}
+	public void addEmprestimo(Emprestimo emprestimo) {
+		emprestimos.add(emprestimo);
+	}
 	public void setEmprestimos(List<Emprestimo> emprestimos) {
 		this.emprestimos = emprestimos;
 	}
