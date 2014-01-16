@@ -1,5 +1,6 @@
 package biblioteca.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.persistence.CascadeType;
@@ -30,16 +31,18 @@ public class Emprestimo {
 		return id;
 	}
 
-	public Calendar getDataRetirada() {
-		return dataRetirada;
+	public String getDataRetirada() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		return simpleDateFormat.format(dataRetirada.getTime());
 	}
 
 	public void setDataRetirada(Calendar dataRetirada) {
 		this.dataRetirada = dataRetirada;
 	}
 
-	public Calendar getDataDevolucao() {
-		return dataDevolucao;
+	public String getDataDevolucao() {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		return simpleDateFormat.format(dataDevolucao.getTime());
 	}
 
 	public void setDataDevolucao(Calendar dataDevolucao) {

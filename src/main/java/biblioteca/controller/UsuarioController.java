@@ -1,8 +1,12 @@
 package biblioteca.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import biblioteca.dao.EmprestimoDao;
 import biblioteca.dao.PessoaDao;
+import biblioteca.model.Emprestimo;
 import biblioteca.model.Usuario;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
@@ -14,6 +18,7 @@ public class UsuarioController {
 	
 	@Inject private PessoaDao dao;
 	@Inject private Result result;
+	@Inject private EmprestimoDao emprestimoDao;
 	
 	@Get
 	public void cadastro(){
@@ -44,5 +49,16 @@ public class UsuarioController {
 		usuario.setCpf(cpf);
 		usuario.setTelefone(telefone);
 		dao.atualiza(usuario);
+	}
+	
+	@Get
+	public void emprestimos() {
+	}
+	
+	@Post
+	public void lista(String nome) {
+		Usuario usuario = dao.busca(nome);
+		List<Emprestimo> listaEmprestimo = emprestimoDao.listaEmprestimo(usuario.getId());
+		result.include("emprestimos", listaEmprestimo);
 	}
 }

@@ -3,4 +3,5 @@
 <nav class="submenu">
 	<a href="<c:url value="/usuario/cadastro" />">Cadastro</a>
 	<a href="<c:url value="/usuario/busca" />">Alterar Cadastro</a>
+	<a href="<c:url value="/usuario/emprestimos" />">Emprestimos</a>
 </nav>
