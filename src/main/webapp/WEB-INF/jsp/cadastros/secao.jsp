@@ -5,7 +5,7 @@
 <tags:menuCadastro />
 <nav class="corpo">
 	 <form action="<c:url value="/cadastros/adicionaSecao" />" method="POST" >
-		Nome: <input type="text" name="nome"size="50"><br>
+		Nome: <input type="text" name="nome"size="50" required><br>
 		
 		<input type="submit" value="Salvar"size="50">
 	 </form> 

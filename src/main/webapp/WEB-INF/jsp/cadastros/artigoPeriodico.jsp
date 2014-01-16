@@ -6,10 +6,10 @@
 <nav class="corpo">
 	 <form action="<c:url value="/cadastros/adicionaArtigoPeriodico" />" method="POST">
 	 	<tags:cadastroPublicacao />
-		Periodico: <input type="text" name="periodico"size="50"><br>
-		Volume: <input type="text" name="volume"size="50"><br><br>
-		Página Inicial: <input type="text" name="paginaInicial"size="50"><br><br>
-		Página Final: <input type="text" name="paginaFinal"size="50"><br><br>
+		Periodico: <input type="text" name="periodico"size="50" required><br>
+		Volume: <input type="text" name="volume"size="50" required><br>
+		Página Inicial: <input type="text" name="paginaInicial"size="50" required><br>
+		Página Final: <input type="text" name="paginaFinal"size="50" required><br><br>
 		
 		<input type="submit" value="Salvar"size="50">
 	</form>

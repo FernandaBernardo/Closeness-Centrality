@@ -5,8 +5,8 @@
 <tags:menuCadastro />
 <nav class="corpo">
 	 <form action="<c:url value="/biblioteca/adicionaBiblioteca" />" method="POST" >
-		Nome: <input type="text" name="nome"size="50"><br>
-		Endereço: <input type="text" name="endereco"size="50"><br>
+		Nome: <input type="text" name="nome"size="50" required><br>
+		Endereço: <input type="text" name="endereco"size="50" required><br>
 		
 		<input type="submit" value="Salvar"size="50">
 	 </form> 

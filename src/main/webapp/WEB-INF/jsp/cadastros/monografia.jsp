@@ -6,9 +6,9 @@
 <nav class="corpo">
 	<form action="<c:url value="/cadastros/adicionaMonografia" />" method="POST">
 		<tags:cadastroPublicacao />
-		Autores: <input type="text" name="autores" size="50"><br>
-		Nome da Instituição: <input type="text" name="nomeInstituicao" size="50"><br>
-		Número da Monografia: <input type="text" name="numeroMonografia" size="50"><br><br>
+		Autores: <input type="text" name="autores" size="50" required><br>
+		Nome da Instituição: <input type="text" name="nomeInstituicao" size="50" required><br>
+		Número da Monografia: <input type="text" name="numeroMonografia" size="50" required><br><br>
 		
 		<input type="submit" value="Salvar"size="50">
 	</form>

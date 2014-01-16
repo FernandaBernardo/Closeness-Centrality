@@ -6,7 +6,7 @@
 <nav class="corpo">
 	<form action="<c:url value="/cadastros/adicionaPeriodico" />" method="POST">
 		<tags:cadastroPublicacao />
-		Editora:<input type="text" name="editora"size="50"><br><br>
+		Editora:<input type="text" name="editora"size="50" required><br><br>
 		
 	    <input type="submit" value="Salvar"size="50">
 	</form>

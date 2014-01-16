@@ -7,7 +7,7 @@
 
 <nav class="corpo">
 	<form action="<c:url value="/usuario/lista" />" method="POST">
-		Nome: <input type="text" name="nome" /><br> 
+		Nome: <input type="text" name="nome" required/><br> 
 		<input type="submit" value="Salvar" />
 	</form>
 </nav>
