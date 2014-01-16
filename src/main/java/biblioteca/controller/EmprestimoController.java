@@ -18,13 +18,14 @@ import biblioteca.model.Emprestimo;
 import biblioteca.model.Livro;
 import biblioteca.model.Monografia;
 import biblioteca.model.Periodico;
-import biblioteca.model.Pessoa;
 import biblioteca.model.Publicacao;
 import biblioteca.model.Usuario;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.hibernate.extra.Load;
+import br.com.caelum.vraptor.interceptor.IncludeParameters;
 
 @Controller
 public class EmprestimoController {
@@ -75,25 +76,31 @@ public class EmprestimoController {
 		result.include("artigosAnal", artigosAnal);
 	}
 	
-	@Get("/emprestimo/publicacao/{id:[0-9]+}")
-	public void publicacao(Long id) {
-		Publicacao publicacao = publicacaoDao.buscaId(id);
+	@Get("/emprestimo/publicacao/{publicacao.id}")
+	public void publicacao(@Load Publicacao publicacao) {
 		result.include("publicacao", publicacao);
+	}
+	
+	@Get @IncludeParameters
+	public void novo(@Load Publicacao publicacao) {
+		Date data = new Date(System.currentTimeMillis());
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String formatRetirada = simpleDateFormat.format(data);
+		result.include("dataRetirada", formatRetirada);		
+		data.setDate(data.getDate()+7);
+		String formatDevolucao = simpleDateFormat.format(data);
+		result.include("dataDevolucao", formatDevolucao);
+		
 	}
 	
 	@Get
-	public void novo(Publicacao publicacao) {
-		result.include("publicacao", publicacao);
-	}
-	
-	@Post
-	public void adiciona(String titulo, String usuario, Long id, String data) throws ParseException {
+	public void adiciona(String titulo, String usuario, Long id, String dataDevolucao, String dataRetirada) throws ParseException {
 		Usuario user = pessoaDao.busca(usuario);
 		Emprestimo emprestimo = new Emprestimo();
 		emprestimo.setPublicacao(publicacaoDao.buscaId(id));
-		Calendar calendar = parseData(data);
+		Calendar calendar = parseData(dataRetirada);
 		emprestimo.setDataRetirada(calendar);
-		calendar.set(calendar.YEAR, calendar.MONTH, calendar.DATE+7);
+		calendar = parseData(dataDevolucao);
 		emprestimo.setDataDevolucao(calendar);
 		emprestimo.setUsuario(user);
 		

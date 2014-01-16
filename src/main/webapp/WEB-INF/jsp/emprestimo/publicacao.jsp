@@ -9,9 +9,6 @@
 	<h3>Biblioteca:</h3> ${publicacao.biblioteca.nome} <br>
 	<h3>Seção:</h3> ${publicacao.secao.nome} <br>
 	
-	<form action="<c:url value="/emprestimo/novo"/>">
-		<input type="hidden" name="publicacao" value="${publicacao}">
-		<input type="submit" value="Novo Empréstimo">	
-	</form>
+	<a href="<c:url value="/emprestimo/novo"/>?publicacao.id=${publicacao.id}" >Novo empréstimo</a>
 </div>
 <tags:footer />

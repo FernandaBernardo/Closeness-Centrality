@@ -5,10 +5,15 @@
 <tags:menuEmprestimos />
 
 <form class="corpo" action='<c:url value="/emprestimo/adiciona"/>'>
-	Título: <input type="text" name="titulo" value="${publicacao.titulo}"><br>
-	Usuário: <input type="text" name="usi" ><br>
-	Data Retirada: <input type="text" name="data">
+	Título: ${publicacao.titulo}
+	<input type="hidden" name="titulo" value="${publicacao.titulo}"><br>
+	Usuário: <input type="text" name="usuario" placeholder="Digite seu nome"><br>
+	Data Devolução: ${dataDevolucao}
+	<input type="hidden" name="dataDevolucao" value="${dataDevolucao}">
+	Data Retirada: ${dataRetirada}
+	<input type="hidden" name="dataRetirada" value="${dataRetirada}">
 	<input type="hidden" name="id" value="${publicacao.id}">
+	<input type="submit" value="Salvar">
 </form>
 
 <tags:footer />
