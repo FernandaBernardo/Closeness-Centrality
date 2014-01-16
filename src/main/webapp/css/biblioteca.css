@@ -1,3 +1,7 @@
+*{
+	font-size: 17px;
+}
+
 header {
 	height: 231px;
 	background-position: center;
@@ -100,13 +104,31 @@ body {
 
 .corpo{
 	width: 50%;
-	top:300px; 
-	left:200px;
+	top:17em; 
+	left:13em;
 	position: absolute;
 	display: block;
 	color: #BE8157;
 	text-decoration: none;
 	padding:1em .5em;
-	text-align: justify;
+	text-align: left;
 	border-bottom: 1px solid #BE8157;
+}
+
+input {
+	padding: .2em;
+	width:100%;
+}
+
+input[type="submit"] {
+	width:20%;
+	float: right;
+}
+
+form {
+	font-size: 18px;
+}
+
+form input {
+	margin: .3em .2em;
 }
