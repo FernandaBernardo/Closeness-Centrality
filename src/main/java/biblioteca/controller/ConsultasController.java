@@ -25,7 +25,6 @@ import biblioteca.model.Publicacao;
 import biblioteca.model.Secao;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 
 @Controller

@@ -133,7 +133,7 @@ public class PublicacaoDao {
 				.setCalendar("anoInicio", anoInicio)
 				.setCalendar("anoFim", anoFim).list();		
 	}
-
+	
 	public List<Publicacao> buscaPublicacaoPorAutorPorSecao(String nome) {
 		return session.createQuery("select p from Autor a join a.publicacoes p join p.secao s where s.nome = :nome order by a.nome").setString("nome", nome).list();
 	}

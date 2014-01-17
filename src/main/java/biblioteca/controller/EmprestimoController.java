@@ -22,7 +22,6 @@ import biblioteca.model.Publicacao;
 import biblioteca.model.Usuario;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.hibernate.extra.Load;
 import br.com.caelum.vraptor.interceptor.IncludeParameters;

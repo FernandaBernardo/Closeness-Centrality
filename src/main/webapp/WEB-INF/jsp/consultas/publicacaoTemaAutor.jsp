@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <tags:header secao="consultas"/>
-<tags:menuConsultasArtigo/>
+<tags:menuConsultasPublicacao />
 <nav class="corpo">
 	<form action="<c:url value="/consultas/temaAutor" />">
 		Tema: <input type="text" name="tema">
