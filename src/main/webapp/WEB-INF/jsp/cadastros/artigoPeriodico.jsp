@@ -4,7 +4,7 @@
 <tags:header secao="cadastroArtigoPeriodico"/>
 <tags:menuCadastro />
 <nav class="corpo">
-	 <form action="<c:url value="/cadastros/adicionaArtigoPeriodico" />" method="POST">
+	 <form id="form" action="<c:url value="/cadastros/adicionaArtigoPeriodico" />" method="POST">
 	 	<tags:cadastroPublicacao />
 		Periodico: <input type="text" name="periodico"size="50" required><br>
 		Volume: <input type="text" name="volume"size="50" required><br>

@@ -17,6 +17,7 @@ import biblioteca.model.ArtigoAnal;
 import biblioteca.model.ArtigoLivro;
 import biblioteca.model.ArtigoPeriodico;
 import biblioteca.model.Autor;
+import biblioteca.model.Biblioteca;
 import biblioteca.model.Livro;
 import biblioteca.model.Monografia;
 import biblioteca.model.Periodico;
@@ -37,18 +38,21 @@ public class CadastrosController {
 
 	@Get
 	public void livro() {
+		result.include("bibliotecas", bibliotecadDao.buscaBibliotecas());
+		result.include("secoes", secaoDao.buscaSecoes());
 	}
 	
 	@Post
 	public void adicionaLivro(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 		String autores, String tituloOriginal, String editora, String numeroPaginas) throws ParseException {
+		Biblioteca buscaBiblioteca = dao.buscaBiblioteca(biblioteca);
 		Secao buscaSecao = dao.buscaSecao(secao);
 		List<Autor> buscaAutores = dao.buscaAutores(autores);
 		Livro livro = new Livro();
 		livro.setTitulo(titulo);
 		livro.setData(parseData(data));
 		livro.setLocal(local);
-		livro.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		livro.setBiblioteca(buscaBiblioteca);
 		livro.setSecao(buscaSecao);
 		livro.setEdicao(Integer.parseInt(edicao));
 		livro.setTituloOriginal(tituloOriginal);
@@ -66,24 +70,32 @@ public class CadastrosController {
 		buscaSecao.addPublicacao(livro);
 		secaoDao.atualiza(buscaSecao);
 		
+		if (!bibliotecaContainsSecao(buscaBiblioteca, buscaSecao)) {
+			buscaBiblioteca.addSecao(buscaSecao);
+			bibliotecadDao.atualizaBiblioteca(buscaBiblioteca);
+		}
+		
 		result.include("tituloLivro", livro.getTitulo());
 	}
 
 	
 	@Get
 	public void monografia() {
+		result.include("bibliotecas", bibliotecadDao.buscaBibliotecas());
+		result.include("secoes", secaoDao.buscaSecoes());
 	}
 	
 	@Post
 	public void adicionaMonografia(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 			String autores, String nomeInstituicao, String numeroMonografia) throws ParseException {
+		Biblioteca buscaBiblioteca = dao.buscaBiblioteca(biblioteca);
 		Secao buscaSecao = dao.buscaSecao(secao);
 		List<Autor> buscaAutores = dao.buscaAutores(autores);
 		Monografia monografia = new Monografia();
 		monografia.setTitulo(titulo);
 		monografia.setData(parseData(data));
 		monografia.setLocal(local);
-		monografia.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		monografia.setBiblioteca(buscaBiblioteca);
 		monografia.setSecao(buscaSecao);
 		monografia.setEdicao(Integer.parseInt(edicao));
 		monografia.setNomeInstituicao(nomeInstituicao);
@@ -100,22 +112,30 @@ public class CadastrosController {
 		buscaSecao.addPublicacao(monografia);
 		secaoDao.atualiza(buscaSecao);
 		
+		if (!bibliotecaContainsSecao(buscaBiblioteca, buscaSecao)) {
+			buscaBiblioteca.addSecao(buscaSecao);
+			bibliotecadDao.atualizaBiblioteca(buscaBiblioteca);
+		}
+		
 		result.include("tituloMonografia", monografia.getTitulo());
 	}
 	
 	@Get
 	public void periodico() {
+		result.include("bibliotecas", bibliotecadDao.buscaBibliotecas());
+		result.include("secoes", secaoDao.buscaSecoes());
 	}
 	
 	@Post
 	public void adicionaPeriodico(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 			String editora) throws ParseException {
+		Biblioteca buscaBiblioteca = dao.buscaBiblioteca(biblioteca);
 		Secao buscaSecao = dao.buscaSecao(secao);
 		Periodico periodico = new Periodico();
 		periodico.setTitulo(titulo);
 		periodico.setData(parseData(data));
 		periodico.setLocal(local);
-		periodico.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		periodico.setBiblioteca(buscaBiblioteca);
 		periodico.setSecao(buscaSecao);
 		periodico.setEdicao(Integer.parseInt(edicao));
 		periodico.setEditora(editora);
@@ -124,23 +144,31 @@ public class CadastrosController {
 		
 		buscaSecao.addPublicacao(periodico);
 		secaoDao.atualiza(buscaSecao);
+		
+		if (!bibliotecaContainsSecao(buscaBiblioteca, buscaSecao)) {
+			buscaBiblioteca.addSecao(buscaSecao);
+			bibliotecadDao.atualizaBiblioteca(buscaBiblioteca);
+		}
 
 		result.include("tituloPeriodico", periodico.getTitulo());
 	}
 	
 	@Get
 	public void anaisConferencia() {
+		result.include("bibliotecas", bibliotecadDao.buscaBibliotecas());
+		result.include("secoes", secaoDao.buscaSecoes());
 	}
 	
 	@Post
 	public void adicionaAnaisConferencia(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 			String editora, String numeroVolume) throws ParseException {
+		Biblioteca buscaBiblioteca = dao.buscaBiblioteca(biblioteca);
 		Secao buscaSecao = dao.buscaSecao(secao);
 		AnaisConferencia anal = new AnaisConferencia();
 		anal.setTitulo(titulo);
 		anal.setData(parseData(data));
 		anal.setLocal(local);
-		anal.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		anal.setBiblioteca(buscaBiblioteca);
 		anal.setSecao(buscaSecao);
 		anal.setEdicao(Integer.parseInt(edicao));
 		anal.setEditora(editora);
@@ -150,24 +178,32 @@ public class CadastrosController {
 		
 		buscaSecao.addPublicacao(anal);
 		secaoDao.atualiza(buscaSecao);
+		
+		if (!bibliotecaContainsSecao(buscaBiblioteca, buscaSecao)) {
+			buscaBiblioteca.addSecao(buscaSecao);
+			bibliotecadDao.atualizaBiblioteca(buscaBiblioteca);
+		}
 
 		result.include("tituloAnal", anal.getTitulo());
 	}
 	
 	@Get
 	public void artigoLivro() {
+		result.include("bibliotecas", bibliotecadDao.buscaBibliotecas());
+		result.include("secoes", secaoDao.buscaSecoes());
 	}
 	
 	@Post
 	public void adicionaArtigoLivro(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 			String livro, String numeroCapitulo) throws ParseException {
+		Biblioteca buscaBiblioteca = dao.buscaBiblioteca(biblioteca);
 		Livro buscaLivro = dao.buscaLivro(livro);
 		Secao buscaSecao = dao.buscaSecao(secao);
 		ArtigoLivro artigoLivro = new ArtigoLivro();
 		artigoLivro.setTitulo(titulo);
 		artigoLivro.setData(parseData(data));
 		artigoLivro.setLocal(local);
-		artigoLivro.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		artigoLivro.setBiblioteca(buscaBiblioteca);
 		artigoLivro.setSecao(buscaSecao);
 		artigoLivro.setEdicao(Integer.parseInt(edicao));
 		artigoLivro.setLivro(buscaLivro);
@@ -178,6 +214,11 @@ public class CadastrosController {
 		buscaSecao.addPublicacao(artigoLivro);
 		secaoDao.atualiza(buscaSecao);
 		
+		if (!bibliotecaContainsSecao(buscaBiblioteca, buscaSecao)) {
+			buscaBiblioteca.addSecao(buscaSecao);
+			bibliotecadDao.atualizaBiblioteca(buscaBiblioteca);
+		}
+		
 		buscaLivro.addArtigosLivro(artigoLivro);
 		dao.atualizaLivro(buscaLivro);
 
@@ -186,18 +227,21 @@ public class CadastrosController {
 	
 	@Get
 	public void artigoPeriodico() {
+		result.include("bibliotecas", bibliotecadDao.buscaBibliotecas());
+		result.include("secoes", secaoDao.buscaSecoes());
 	}
 	
 	@Post
 	public void adicionaArtigoPeriodico(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 			String periodico, String volume, String paginaInicial, String paginaFinal) throws ParseException {
+		Biblioteca buscaBiblioteca = dao.buscaBiblioteca(biblioteca);
 		Periodico buscaPeriodico = dao.buscaPeriodico(periodico);
 		Secao buscaSecao = dao.buscaSecao(secao);
 		ArtigoPeriodico artigoPeriodico = new ArtigoPeriodico();
 		artigoPeriodico.setTitulo(titulo);
 		artigoPeriodico.setData(parseData(data));
 		artigoPeriodico.setLocal(local);
-		artigoPeriodico.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		artigoPeriodico.setBiblioteca(buscaBiblioteca);
 		artigoPeriodico.setSecao(buscaSecao);
 		artigoPeriodico.setEdicao(Integer.parseInt(edicao));
 		artigoPeriodico.setPeriodico(buscaPeriodico);
@@ -210,6 +254,11 @@ public class CadastrosController {
 		buscaSecao.addPublicacao(artigoPeriodico);
 		secaoDao.atualiza(buscaSecao);
 		
+		if (!bibliotecaContainsSecao(buscaBiblioteca, buscaSecao)) {
+			buscaBiblioteca.addSecao(buscaSecao);
+			bibliotecadDao.atualizaBiblioteca(buscaBiblioteca);
+		}
+		
 		buscaPeriodico.addArtigoPeriodico(artigoPeriodico);
 		dao.atualizaArtigoPeriodico(artigoPeriodico);
 
@@ -218,18 +267,21 @@ public class CadastrosController {
 	
 	@Get
 	public void artigoAnal() {
+		result.include("bibliotecas", bibliotecadDao.buscaBibliotecas());
+		result.include("secoes", secaoDao.buscaSecoes());
 	}
 	
 	@Post
 	public void adicionaArtigoAnal(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 			String anal, String paginaInicial, String paginaFinal, String volume) throws ParseException {
+		Biblioteca buscaBiblioteca = dao.buscaBiblioteca(biblioteca);
 		AnaisConferencia buscaAnaisConferencia = dao.buscaAnaisConferencia(anal);
 		Secao buscaSecao = dao.buscaSecao(secao);
 		ArtigoAnal artigoAnal = new ArtigoAnal();
 		artigoAnal.setTitulo(titulo);
 		artigoAnal.setData(parseData(data));
 		artigoAnal.setLocal(local);
-		artigoAnal.setBiblioteca(dao.buscaBiblioteca(biblioteca));
+		artigoAnal.setBiblioteca(buscaBiblioteca);
 		artigoAnal.setSecao(buscaSecao);
 		artigoAnal.setEdicao(Integer.parseInt(edicao));
 		artigoAnal.setAnaisConferencia(buscaAnaisConferencia);
@@ -241,6 +293,11 @@ public class CadastrosController {
 
 		buscaSecao.addPublicacao(artigoAnal);
 		secaoDao.atualiza(buscaSecao);
+		
+		if (!bibliotecaContainsSecao(buscaBiblioteca, buscaSecao)) {
+			buscaBiblioteca.addSecao(buscaSecao);
+			bibliotecadDao.atualizaBiblioteca(buscaBiblioteca);
+		}
 		
 		buscaAnaisConferencia.addArtigoAnal(artigoAnal);
 		dao.atualizaArtigoAnal(artigoAnal);
@@ -284,5 +341,9 @@ public class CadastrosController {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime((Date) new SimpleDateFormat("dd/MM/yyyy").parse(data));
 		return cal;
+	}
+	
+	private boolean bibliotecaContainsSecao(Biblioteca biblioteca, Secao secao) {
+		return biblioteca.getSecoes().contains(secao);
 	}
 }

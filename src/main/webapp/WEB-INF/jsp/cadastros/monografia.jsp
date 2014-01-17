@@ -4,7 +4,7 @@
 <tags:header secao="cadastroMonografia"/>
 <tags:menuCadastro />
 <nav class="corpo">
-	<form action="<c:url value="/cadastros/adicionaMonografia" />" method="POST">
+	<form id="form" action="<c:url value="/cadastros/adicionaMonografia" />" method="POST">
 		<tags:cadastroPublicacao />
 		Autores: <input type="text" name="autores" size="50" required><br>
 		Nome da Instituição: <input type="text" name="nomeInstituicao" size="50" required><br>

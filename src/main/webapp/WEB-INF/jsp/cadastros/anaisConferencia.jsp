@@ -5,7 +5,7 @@
 <tags:menuCadastro />
 
 <nav class="corpo">
-	<form action="<c:url value="/cadastros/adicionaAnaisConferencia" />" method="POST">
+	<form id="form" action="<c:url value="/cadastros/adicionaAnaisConferencia" />" method="POST">
 		<tags:cadastroPublicacao />
 		
 		Editora: <input type="text" name="editora" size="50" required><br>

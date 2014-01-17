@@ -4,7 +4,7 @@
 <tags:header secao="cadastroArtigoAnaisConferencia"/>
 <tags:menuCadastro />
 <nav class="corpo">
-	 <form action="<c:url value="/cadastros/adicionaArtigoAnal" />" method="POST">
+	 <form id="form" action="<c:url value="/cadastros/adicionaArtigoAnal" />" method="POST">
 	 	<tags:cadastroPublicacao />
 		Anal de Conferência: <input type="text" name="anal"size="50" required><br>
 		Página Inicial: <input type="text" name="paginaInicial"size="50" required><br>
