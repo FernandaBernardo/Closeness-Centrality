@@ -24,4 +24,8 @@ public class SecaoDao {
 		return (Secao) session.createQuery("from Secao s where s.nome=:nome").setString("nome", secao).uniqueResult();
 	}
 
+	public void atualiza(Secao secao) {
+		session.update(secao);
+	}
+
 }

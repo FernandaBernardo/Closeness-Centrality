@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -41,19 +42,29 @@ public class CadastrosController {
 	@Post
 	public void adicionaLivro(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 		String autores, String tituloOriginal, String editora, String numeroPaginas) throws ParseException {
+		Secao buscaSecao = dao.buscaSecao(secao);
+		List<Autor> buscaAutores = dao.buscaAutores(autores);
 		Livro livro = new Livro();
 		livro.setTitulo(titulo);
 		livro.setData(parseData(data));
 		livro.setLocal(local);
 		livro.setBiblioteca(dao.buscaBiblioteca(biblioteca));
-		livro.setSecao(dao.buscaSecao(secao));
+		livro.setSecao(buscaSecao);
 		livro.setEdicao(Integer.parseInt(edicao));
 		livro.setTituloOriginal(tituloOriginal);
 		livro.setEditora(editora);
 		livro.setNumeroPaginas(Integer.parseInt(numeroPaginas));
-		livro.setAutores(dao.buscaAutores(autores));
+		livro.setAutores(buscaAutores);
 		
 		dao.adiciona(livro);
+		
+		for (Autor autor : buscaAutores) {
+			autor.addPublicacao(livro);
+			pessoaDao.atualiza(autor);
+		}
+		
+		buscaSecao.addPublicacao(livro);
+		secaoDao.atualiza(buscaSecao);
 		
 		result.include("tituloLivro", livro.getTitulo());
 	}
@@ -66,19 +77,28 @@ public class CadastrosController {
 	@Post
 	public void adicionaMonografia(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 			String autores, String nomeInstituicao, String numeroMonografia) throws ParseException {
+		Secao buscaSecao = dao.buscaSecao(secao);
+		List<Autor> buscaAutores = dao.buscaAutores(autores);
 		Monografia monografia = new Monografia();
 		monografia.setTitulo(titulo);
 		monografia.setData(parseData(data));
 		monografia.setLocal(local);
 		monografia.setBiblioteca(dao.buscaBiblioteca(biblioteca));
-		monografia.setSecao(dao.buscaSecao(secao));
+		monografia.setSecao(buscaSecao);
 		monografia.setEdicao(Integer.parseInt(edicao));
 		monografia.setNomeInstituicao(nomeInstituicao);
 		monografia.setNumeroMonografia(Integer.parseInt(numeroMonografia));
+		monografia.setAutores(buscaAutores);
 
-		//VER AUTORES
-		
 		dao.adiciona(monografia);
+		
+		for (Autor autor : buscaAutores) {
+			autor.addPublicacao(monografia);
+			pessoaDao.atualiza(autor);
+		}
+
+		buscaSecao.addPublicacao(monografia);
+		secaoDao.atualiza(buscaSecao);
 		
 		result.include("tituloMonografia", monografia.getTitulo());
 	}
@@ -90,19 +110,21 @@ public class CadastrosController {
 	@Post
 	public void adicionaPeriodico(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 			String editora) throws ParseException {
+		Secao buscaSecao = dao.buscaSecao(secao);
 		Periodico periodico = new Periodico();
 		periodico.setTitulo(titulo);
 		periodico.setData(parseData(data));
 		periodico.setLocal(local);
 		periodico.setBiblioteca(dao.buscaBiblioteca(biblioteca));
-		periodico.setSecao(dao.buscaSecao(secao));
+		periodico.setSecao(buscaSecao);
 		periodico.setEdicao(Integer.parseInt(edicao));
 		periodico.setEditora(editora);
 
-		//VER AUTORES
-		
 		dao.adiciona(periodico);
 		
+		buscaSecao.addPublicacao(periodico);
+		secaoDao.atualiza(buscaSecao);
+
 		result.include("tituloPeriodico", periodico.getTitulo());
 	}
 	
@@ -113,20 +135,29 @@ public class CadastrosController {
 	@Post
 	public void adicionaAnaisConferencia(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 			String artigos, String editora, String numeroVolume) throws ParseException {
+		Secao buscaSecao = dao.buscaSecao(secao);
+		List<ArtigoAnal> buscaArtigos = dao.buscaArtigos(artigos);
 		AnaisConferencia anal = new AnaisConferencia();
 		anal.setTitulo(titulo);
 		anal.setData(parseData(data));
 		anal.setLocal(local);
 		anal.setBiblioteca(dao.buscaBiblioteca(biblioteca));
-		anal.setSecao(dao.buscaSecao(secao));
+		anal.setSecao(buscaSecao);
 		anal.setEdicao(Integer.parseInt(edicao));
 		anal.setEditora(editora);
 		anal.setNumeroVolume(Integer.parseInt(numeroVolume));
+		anal.setArtigoAnal(buscaArtigos);
 
-		//VER ARTIGOS
-		
 		dao.adiciona(anal);
 		
+		for (ArtigoAnal artigoAnal : buscaArtigos) {
+			artigoAnal.setAnaisConferencia(anal);
+			dao.atualizaArtigoAnal(artigoAnal);
+		}
+		
+		buscaSecao.addPublicacao(anal);
+		secaoDao.atualiza(buscaSecao);
+
 		result.include("tituloAnal", anal.getTitulo());
 	}
 	
@@ -137,18 +168,22 @@ public class CadastrosController {
 	@Post
 	public void adicionaArtigoLivro(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 			String livro, String numeroCapitulo) throws ParseException {
+		Secao buscaSecao = dao.buscaSecao(secao);
 		ArtigoLivro artigoLivro = new ArtigoLivro();
 		artigoLivro.setTitulo(titulo);
 		artigoLivro.setData(parseData(data));
 		artigoLivro.setLocal(local);
 		artigoLivro.setBiblioteca(dao.buscaBiblioteca(biblioteca));
-		artigoLivro.setSecao(dao.buscaSecao(secao));
+		artigoLivro.setSecao(buscaSecao);
 		artigoLivro.setEdicao(Integer.parseInt(edicao));
 		artigoLivro.setLivro(dao.buscaLivro(livro));
 		artigoLivro.setNumCapitulo(Integer.parseInt(numeroCapitulo));
-		
+
 		dao.adiciona(artigoLivro);
 		
+		buscaSecao.addPublicacao(artigoLivro);
+		secaoDao.atualiza(buscaSecao);
+
 		result.include("tituloArtigoLivro", artigoLivro.getTitulo());
 	}
 	
@@ -159,20 +194,24 @@ public class CadastrosController {
 	@Post
 	public void adicionaArtigoPeriodico(String titulo, String data, String local, String biblioteca, String secao, String edicao,
 			String periodico, String volume, String paginaInicial, String paginaFinal) throws ParseException {
+		Secao buscaSecao = dao.buscaSecao(secao);
 		ArtigoPeriodico artigoPeriodico = new ArtigoPeriodico();
 		artigoPeriodico.setTitulo(titulo);
 		artigoPeriodico.setData(parseData(data));
 		artigoPeriodico.setLocal(local);
 		artigoPeriodico.setBiblioteca(dao.buscaBiblioteca(biblioteca));
-		artigoPeriodico.setSecao(dao.buscaSecao(secao));
+		artigoPeriodico.setSecao(buscaSecao);
 		artigoPeriodico.setEdicao(Integer.parseInt(edicao));
 		artigoPeriodico.setPeriodico(dao.buscaPeriodico(periodico));
 		artigoPeriodico.setVolume(Integer.parseInt(volume));
 		artigoPeriodico.setPaginaInicial(Integer.parseInt(paginaInicial));
 		artigoPeriodico.setPaginaFinal(Integer.parseInt(paginaFinal));
-		
+
 		dao.adiciona(artigoPeriodico);
 		
+		buscaSecao.addPublicacao(artigoPeriodico);
+		secaoDao.atualiza(buscaSecao);
+
 		result.include("tituloArtigoPeriodico", artigoPeriodico.getTitulo());
 	}
 	
@@ -182,20 +221,25 @@ public class CadastrosController {
 	
 	@Post
 	public void adicionaArtigoAnal(String titulo, String data, String local, String biblioteca, String secao, String edicao,
-			String anal, String paginaInicial, String paginaFinal) throws ParseException {
+			String anal, String paginaInicial, String paginaFinal, String volume) throws ParseException {
+		Secao buscaSecao = dao.buscaSecao(secao);
 		ArtigoAnal artigoAnal = new ArtigoAnal();
 		artigoAnal.setTitulo(titulo);
 		artigoAnal.setData(parseData(data));
 		artigoAnal.setLocal(local);
 		artigoAnal.setBiblioteca(dao.buscaBiblioteca(biblioteca));
-		artigoAnal.setSecao(dao.buscaSecao(secao));
+		artigoAnal.setSecao(buscaSecao);
 		artigoAnal.setEdicao(Integer.parseInt(edicao));
 		artigoAnal.setAnaisConferencia(dao.buscaAnaisConferencia(anal));
 		artigoAnal.setPaginaInicial(Integer.parseInt(paginaInicial));
 		artigoAnal.setPaginaFinal(Integer.parseInt(paginaFinal));
+		artigoAnal.setVolume(Integer.parseInt(volume));
 		
 		dao.adiciona(artigoAnal);
-		
+
+		buscaSecao.addPublicacao(artigoAnal);
+		secaoDao.atualiza(buscaSecao);
+
 		result.include("tituloArtigoAnal", artigoAnal.getTitulo());
 	}
 	

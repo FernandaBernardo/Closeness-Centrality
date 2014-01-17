@@ -27,4 +27,8 @@ public class PessoaDao {
 	public void atualiza(Usuario usuario) {
 		session.update(usuario);
 	}
+
+	public void atualiza(Autor autor) {
+		session.update(autor);
+	}
 }

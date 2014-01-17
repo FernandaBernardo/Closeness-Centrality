@@ -12,18 +12,21 @@ import javax.persistence.OneToMany;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class AnaisConferencia extends Publicacao {
 	@OneToMany(cascade = {CascadeType.ALL})
-	private List<Artigo> artigos;
+	private List<ArtigoAnal> artigoAnal;
 	
 	private String editora;
 	
 	private int numeroVolume;
 	
 	
-	public List<Artigo> getArtigos() {
-		return artigos;
+	public List<ArtigoAnal> getArtigoAnals() {
+		return artigoAnal;
 	}
-	public void setArtigos(List<Artigo> artigos) {
-		this.artigos = artigos;
+	public void setArtigoAnal(List<ArtigoAnal> ArtigoAnals) {
+		this.artigoAnal = ArtigoAnals;
+	}
+	public void addArtigoAnal(ArtigoAnal ArtigoAnal) {
+		artigoAnal.add(ArtigoAnal);
 	}
 	public String getEditora() {
 		return editora;

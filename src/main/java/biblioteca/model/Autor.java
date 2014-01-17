@@ -21,4 +21,8 @@ public class Autor extends Pessoa{
 	public void setPublicacoes(List<Publicacao> publicacoes) {
 		this.publicacoes = publicacoes;
 	}
+
+	public void addPublicacao(Publicacao publicacao) {
+		publicacoes.add(publicacao);
+	}
 }
