@@ -168,3 +168,11 @@ form input {
 	border-radius: 10px;
 	margin-right: 1.5em;
 }
+
+.novo h3 {
+	display: inline-block;
+}
+
+.novo input[type="text"] {
+	width: 85%;
+}

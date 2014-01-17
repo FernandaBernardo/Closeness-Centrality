@@ -4,7 +4,7 @@
 <tags:header secao="cadastroBiblioteca"/>
 <tags:menuCadastro />
 <div class="corpo">
-	<a href='<c:url value="/biblioteca/adiciona"></c:url>'>Adiciona Biblioteca</a>
-	<a href='<c:url value="/biblioteca/secaoBiblioteca"></c:url>'>Adiciona Seção na Biblioteca</a>
+	<a class="novo-emprestimo" href='<c:url value="/biblioteca/adiciona"></c:url>'>Adiciona Biblioteca</a>
+	<a class="novo-emprestimo" href='<c:url value="/biblioteca/secaoBiblioteca"></c:url>'>Adiciona Seção na Biblioteca</a>
 </div>
 <tags:footer />
