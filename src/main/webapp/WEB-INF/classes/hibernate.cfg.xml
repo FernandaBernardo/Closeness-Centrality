@@ -14,7 +14,6 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 				
 		<mapping class="biblioteca.model.AnaisConferencia"/>
-		<mapping class="biblioteca.model.Artigo"/>
 		<mapping class="biblioteca.model.ArtigoAnal"/>
 		<mapping class="biblioteca.model.ArtigoLivro"/>
 		<mapping class="biblioteca.model.ArtigoPeriodico"/>
