@@ -6,7 +6,9 @@ import javax.inject.Inject;
 
 import biblioteca.dao.EmprestimoDao;
 import biblioteca.dao.PessoaDao;
+import biblioteca.dao.PublicacaoDao;
 import biblioteca.model.Emprestimo;
+import biblioteca.model.Publicacao;
 import biblioteca.model.Usuario;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
@@ -17,6 +19,7 @@ import br.com.caelum.vraptor.Result;
 public class UsuarioController {
 	
 	@Inject private PessoaDao dao;
+	@Inject private PublicacaoDao publicacaoDao;
 	@Inject private Result result;
 	@Inject private EmprestimoDao emprestimoDao;
 	
@@ -61,4 +64,17 @@ public class UsuarioController {
 		List<Emprestimo> listaEmprestimo = emprestimoDao.listaEmprestimo(usuario.getId());
 		result.include("emprestimos", listaEmprestimo);
 	}
+	
+	@Get
+	public void usuarioEmprestimos() {
+	}
+	
+	@Post
+	public void listaUsuariosEmprestimo(String titulo) {
+		Publicacao publicacao = publicacaoDao.buscaPublicacaoPorTitulo(titulo);
+		List<Usuario> usuarios = dao.buscaPorPublicacao(publicacao);
+		result.include("usuarios", usuarios);
+		result.include("titulo", titulo);
+	}
+
 }

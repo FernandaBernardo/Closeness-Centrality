@@ -1,10 +1,13 @@
 package biblioteca.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.hibernate.Session;
 
 import biblioteca.model.Autor;
+import biblioteca.model.Publicacao;
 import biblioteca.model.Usuario;
 
 public class PessoaDao {
@@ -31,4 +34,13 @@ public class PessoaDao {
 	public void atualiza(Autor autor) {
 		session.update(autor);
 	}
+
+	public List<Autor> buscaTodosAutores() {
+		return session.createQuery("from Autor").list();
+	}
+
+	public List<Usuario> buscaPorPublicacao(Publicacao publicacao) {
+		return session.createQuery("select e.usuario from Emprestimo e where e.publicacao = :publicacao").setEntity("publicacao", publicacao).list();
+	}
+
 }

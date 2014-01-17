@@ -1,6 +1,7 @@
 package biblioteca.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,13 +19,15 @@ import biblioteca.model.Publicacao;
 import biblioteca.model.Secao;
 
 public class PublicacaoDao {
-
 	@Inject
 	private Session session;
 
 	public void adiciona(Publicacao publicacao) {
 		session.save(publicacao);
-		System.out.println("CLASSEEEE "+publicacao.getClass().getName());
+	}
+	
+	public List<String> secaoPublicacao(){
+		return (List<String>) session.createSQLQuery("select * from Secao_Publicacao");
 	}
 
 	public Biblioteca buscaBiblioteca(String biblioteca) {
@@ -112,4 +115,32 @@ public class PublicacaoDao {
 	public void atualizaArtigoPeriodico(ArtigoPeriodico artigoPeriodico) {
 		session.update(artigoPeriodico);
 	}
+
+	public List<Publicacao> buscaPublicacaoPorAutor() {
+		return session.createQuery("select p from Autor a join a.publicacoes p order by a.nome").list();
+	}
+
+	public List<Publicacao> buscaPublicacaoPorTema() {
+		return session.createQuery("select p from Secao s join s.publicacoes p order by s.nome").list();
+	}
+
+	public List<Publicacao> buscaPublicacoesPorTitulo() {
+		return session.createQuery("from Publicacao order by titulo").list();
+	}
+	
+	public List<ArtigoPeriodico> buscaPeriodicoData(Calendar anoInicio, Calendar anoFim) {
+		return session.createQuery("from ArtigoPeriodico p where p. data between :anoInicio and :anoFim order by p.data")
+				.setCalendar("anoInicio", anoInicio)
+				.setCalendar("anoFim", anoFim).list();		
+	}
+
+	public List<Publicacao> buscaPublicacaoPorAutorPorSecao(String nome) {
+		return session.createQuery("select p from Autor a join a.publicacoes p join p.secao s where s.nome = :nome order by a.nome").setString("nome", nome).list();
+	}
+
+	public Publicacao buscaPublicacaoPorTitulo(String titulo) {
+		return (Publicacao) session.createQuery("from Publicacao p where p.titulo = :titulo order by p.titulo").setString("titulo", titulo).uniqueResult();
+	}
+	
+	
 }

@@ -1,7 +1,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<tags:header secao=""/>
+<tags:header secao="emprestimos"/>
 <tags:menuEmprestimos />
 
 <form class="corpo novo" action='<c:url value="/emprestimo/adiciona"/>'>

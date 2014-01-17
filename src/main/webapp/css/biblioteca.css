@@ -64,6 +64,33 @@ body {
 	background-image: url("../imgs/usuarios.jpg");
 }
 
+.emprestimoLivro {
+	background-image: url("../imgs/emprestimoLivro.jpg");
+}
+
+.emprestimoMonografia {
+	background-image: url("../imgs/emprestimoMonografia.jpg");
+}
+
+.emprestimoPeriodico {
+	background-image: url("../imgs/emprestimoPeriodico.jpg");
+}
+
+.emprestimoAnaisConferencia {
+	background-image: url("../imgs/emprestimoAnaisConferencia.jpg");
+}
+
+.emprestimoArtigoLivro {
+	background-image: url("../imgs/emprestimoArtigoLivro.jpg");
+}
+
+.emprestimoArtigoPeriodico {
+	background-image: url("../imgs/emprestimoArtigoPeriodico.jpg");
+}
+
+.emprestimoArtigosAnaisConferencia {
+	background-image: url("../imgs/emprestimoArtigosAnaisConferencia.jpg");
+}
 .menu{
 	width: 100%;
 	height: 2em;

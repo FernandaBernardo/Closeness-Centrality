@@ -1,7 +1,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 
-<tags:header secao=""/>
+<tags:header secao="emprestimoArtigoPeriodico"/>
 <tags:menuEmprestimos />
-<tags:lista publicacoes="${artigosPeriodico}"/>
+<tags:listaEmprestimo publicacoes="${artigosPeriodico}"/>
 
 <tags:footer />
