@@ -9,6 +9,7 @@ import org.hibernate.Session;
 
 import biblioteca.model.AnaisConferencia;
 import biblioteca.model.ArtigoAnal;
+import biblioteca.model.ArtigoPeriodico;
 import biblioteca.model.Autor;
 import biblioteca.model.Biblioteca;
 import biblioteca.model.Livro;
@@ -102,5 +103,13 @@ public class PublicacaoDao {
 
 	public void atualizaArtigoAnal(ArtigoAnal artigoAnal) {
 		session.update(artigoAnal);
+	}
+
+	public void atualizaLivro(Livro livro) {
+		session.update(livro);
+	}
+
+	public void atualizaArtigoPeriodico(ArtigoPeriodico artigoPeriodico) {
+		session.update(artigoPeriodico);
 	}
 }

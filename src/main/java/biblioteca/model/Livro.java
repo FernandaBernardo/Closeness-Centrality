@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 public class Livro extends Publicacao{
 	@ManyToMany(cascade = {CascadeType.ALL})
 	private List<Autor> autores;
+	@ManyToMany(cascade = {CascadeType.ALL})
+	private List<ArtigoLivro> artigosLivro;
 	private String tituloOriginal; //opcional
 	private String editora;
 	private int numeroPaginas; //opcional
@@ -40,5 +42,14 @@ public class Livro extends Publicacao{
 	}
 	public void setNumeroPaginas(int numeroPaginas) {
 		this.numeroPaginas = numeroPaginas;
+	}
+	public List<ArtigoLivro> getArtigosLivro() {
+		return artigosLivro;
+	}
+	public void setArtigosLivro(List<ArtigoLivro> artigosLivro) {
+		this.artigosLivro = artigosLivro;
+	}
+	public void addArtigosLivro(ArtigoLivro artigoLivro) {
+		artigosLivro.add(artigoLivro);
 	}
 }

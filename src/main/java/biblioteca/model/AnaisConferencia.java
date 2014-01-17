@@ -6,28 +6,19 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public class AnaisConferencia extends Publicacao {
-	@OneToMany(cascade = {CascadeType.ALL})
-	private List<ArtigoAnal> artigoAnal;
-	
+public class AnaisConferencia extends Publicacao {	
 	private String editora;
 	
 	private int numeroVolume;
 	
+	@ManyToMany(cascade = {CascadeType.ALL})
+	private List<ArtigoAnal> artigosAnal;
 	
-	public List<ArtigoAnal> getArtigoAnals() {
-		return artigoAnal;
-	}
-	public void setArtigoAnal(List<ArtigoAnal> ArtigoAnals) {
-		this.artigoAnal = ArtigoAnals;
-	}
-	public void addArtigoAnal(ArtigoAnal ArtigoAnal) {
-		artigoAnal.add(ArtigoAnal);
-	}
 	public String getEditora() {
 		return editora;
 	}
@@ -40,5 +31,13 @@ public class AnaisConferencia extends Publicacao {
 	public void setNumeroVolume(int numeroVolume) {
 		this.numeroVolume = numeroVolume;
 	}
-	
+	public List<ArtigoAnal> getArtigosAnal() {
+		return artigosAnal;
+	}
+	public void setArtigosAnal(List<ArtigoAnal> artigosAnal) {
+		this.artigosAnal = artigosAnal;
+	}
+	public void addArtigoAnal(ArtigoAnal anal) {
+		artigosAnal.add(anal);
+	}
 }
