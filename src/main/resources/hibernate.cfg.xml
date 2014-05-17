@@ -4,28 +4,15 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<property name="connection.url">jdbc:postgresql://localhost/biblioteca</property>
-		<property name="connection.driver_class">org.postgresql.Driver</property>
-		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-		<property name="connection.username">fernanda</property>
-		<property name="connection.password">1234</property>
+		<property name="connection.url">jdbc:mysql://localhost/diabetes</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password"></property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
-				
-		<mapping class="biblioteca.model.AnaisConferencia"/>
-		<mapping class="biblioteca.model.ArtigoAnal"/>
-		<mapping class="biblioteca.model.ArtigoLivro"/>
-		<mapping class="biblioteca.model.ArtigoPeriodico"/>
-		<mapping class="biblioteca.model.Autor"/>
-		<mapping class="biblioteca.model.Biblioteca"/>
-		<mapping class="biblioteca.model.Emprestimo"/>
-		<mapping class="biblioteca.model.Livro"/>
-		<mapping class="biblioteca.model.Monografia"/>
-		<mapping class="biblioteca.model.Periodico"/>
-		<mapping class="biblioteca.model.Pessoa"/>
-		<mapping class="biblioteca.model.Publicacao"/>
-		<mapping class="biblioteca.model.Secao"/>
-		<mapping class="biblioteca.model.Usuario"/>
+		
+		<mapping class="br.com.caelum.diabetes.Alimento"/>
 	</session-factory>
 </hibernate-configuration>
