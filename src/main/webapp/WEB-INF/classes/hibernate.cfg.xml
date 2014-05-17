@@ -13,6 +13,6 @@
 		<property name="format_sql">true</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		
-		<mapping class="br.com.caelum.diabetes.Alimento"/>
+		<mapping class="br.com.caelum.diabetes.model.Alimento"/>
 	</session-factory>
 </hibernate-configuration>

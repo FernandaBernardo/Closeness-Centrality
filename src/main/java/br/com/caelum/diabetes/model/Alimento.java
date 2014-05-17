@@ -1,4 +1,4 @@
-package br.com.caelum.diabetes;
+package br.com.caelum.diabetes.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
