@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<property name="connection.url">jdbc:mysql://us-cdbr-east-05.cleardb.net/heroku_afb831cbd952c6d?reconnect=true</property>
+		<property name="connection.url">jdbc:mysql://us-cdbr-east-05.cleardb.net</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
 		<property name="connection.username">be6c7b11c6d32e</property>
