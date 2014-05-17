@@ -4,11 +4,11 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<property name="connection.url">jdbc:mysql://us-cdbr-east-05.cleardb.net</property>
+		<property name="connection.url">jdbc:mysql://us-cdbr-east-05.cleardb.net/heroku_efcd5ea9101bb99?reconnect=true</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
-		<property name="connection.username">be6c7b11c6d32e</property>
-		<property name="connection.password">75276429</property>
+		<property name="connection.username">b1430cc08c86de</property>
+		<property name="connection.password">132976c7</property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
