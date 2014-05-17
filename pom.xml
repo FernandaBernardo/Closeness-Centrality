@@ -47,6 +47,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 
 		<dependency>
 			<groupId>antlr</groupId>
@@ -98,11 +104,6 @@
 			<artifactId>javax.el-api</artifactId>
 			<version>2.2.4</version>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
 		</dependency>
 		
 		<!-- Validação -->
@@ -180,7 +181,7 @@
 						<phase>package</phase>
 						<configuration>
 							<descriptors>
-								<descriptor>assembly.xml</descriptor>
+								<descriptor>src/main/webapp/WEB-INF/assembly.xml</descriptor>
 							</descriptors>
 						</configuration>
 						<goals>
@@ -189,6 +190,39 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+		        <artifactId>maven-antrun-plugin</artifactId>
+		        <executions>
+		            <execution>
+		                <id>copy-conf</id>
+		                <phase>install</phase>
+		                <configuration>
+		                    <tasks>
+		                        <copy todir="${project.build.directory}/../tomcat/conf">
+		                            <fileset dir="deploy/conf" />
+		                        </copy>
+		                    </tasks>
+		                </configuration>
+		                <goals>
+		                    <goal>run</goal>
+		                </goals>
+		            </execution>
+		            <execution>
+		                <id>copy-project</id>
+		                <phase>install</phase>
+		                <configuration>
+		                    <tasks>
+		                        <copy todir="${project.build.directory}/../tomcat/webapps/ROOT">
+		                            <fileset dir="target/${project.build.finalName}" />
+		                        </copy>
+		                    </tasks>
+		                </configuration>
+		                <goals>
+		                    <goal>run</goal>
+		                </goals>
+		            </execution>
+		        </executions>
+		    </plugin>
 		</plugins>
 	</build>
 
