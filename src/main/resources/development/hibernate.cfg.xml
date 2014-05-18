@@ -14,5 +14,17 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		
 		<mapping class="br.com.caelum.diabetes.model.Alimento"/>
+		<mapping class="br.com.caelum.diabetes.model.ContagemCarboidrato"/>
+		<mapping class="br.com.caelum.diabetes.model.DadosMedicos"/>
+		<mapping class="br.com.caelum.diabetes.model.Exame"/>
+		<mapping class="br.com.caelum.diabetes.model.Exercicio"/>
+		<mapping class="br.com.caelum.diabetes.model.Glicemia"/>
+		<mapping class="br.com.caelum.diabetes.model.Horario"/>
+		<mapping class="br.com.caelum.diabetes.model.Lembrete"/>
+		<mapping class="br.com.caelum.diabetes.model.Medico"/>
+		<mapping class="br.com.caelum.diabetes.model.Paciente"/>
+		<mapping class="br.com.caelum.diabetes.model.Periodo"/>
+		<mapping class="br.com.caelum.diabetes.model.Usuario"/>
+		<mapping class="br.com.caelum.diabetes.model.ValoresDadosMedicos"/>
 	</session-factory>
 </hibernate-configuration>
