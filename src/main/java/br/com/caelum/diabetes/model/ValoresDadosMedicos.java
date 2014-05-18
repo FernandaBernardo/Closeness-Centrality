@@ -5,17 +5,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
-public class Alimento {
+public class ValoresDadosMedicos {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	Long id;
-	
-	@NotEmpty
-	String nome;
-	
-	@NotEmpty
-	double carboidrato;
+	double cafe;
+	double lancheManha;
+	double almoco;
+	double lancheTarde;
+	double jantar;
+	double ceia;
+	double madrugada;
 }

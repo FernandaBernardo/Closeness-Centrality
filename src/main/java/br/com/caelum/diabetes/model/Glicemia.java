@@ -4,18 +4,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Alimento {
+public class Glicemia {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	Long id;
 	
-	@NotEmpty
-	String nome;
+	@OneToOne
+	Horario horario;
 	
 	@NotEmpty
-	double carboidrato;
+	int valorGlicemia;
+	
+	double totalInsulina;
 }

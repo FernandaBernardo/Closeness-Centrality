@@ -1,21 +1,25 @@
 package br.com.caelum.diabetes.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Alimento {
+public class ContagemCarboidrato {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	Long id;
 	
-	@NotEmpty
-	String nome;
+	@OneToOne
+	Horario horario;
 	
-	@NotEmpty
-	double carboidrato;
+	double totalInsulina;
+	
+	@OneToMany
+	List<Alimento> alimentos;
 }

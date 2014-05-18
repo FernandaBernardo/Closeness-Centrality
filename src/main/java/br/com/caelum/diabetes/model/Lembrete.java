@@ -4,18 +4,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.joda.time.DateTime;
 
 @Entity
-public class Alimento {
+public class Lembrete {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	Long id;
 	
-	@NotEmpty
-	String nome;
+	@ManyToOne
+	Paciente paciente;
+	
+	@Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+	DateTime data;
 	
 	@NotEmpty
-	double carboidrato;
+	String evento;
+	
+	int alarme;
 }
