@@ -6,15 +6,11 @@ import java.util.Scanner;
 
 public class ParserText {
 
-	public static Graph parse(String text) throws FileNotFoundException {
-		Scanner sc = new Scanner(new File(text));
-		Graph graph= new Graph();
-		while(sc.hasNext()) {
-			int id = sc.nextInt();
-			graph.addVertex(new Vertex(id));
-		}
-		
-		sc = new Scanner(new File(text));
+	static Graph graph;
+
+	public static Graph parse(String file) throws FileNotFoundException {
+		Scanner sc = new Scanner(new File(file));
+		graph = new Graph();
 		
 		while(sc.hasNext()) {
 			String[] strings = sc.nextLine().split(" ");
@@ -26,5 +22,4 @@ public class ParserText {
 		
 		return graph;
 	}
-	
 }

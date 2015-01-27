@@ -1,6 +1,8 @@
 package br.com.caelum.vraptor.controller;
 
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Vertex {
 	private int id;	
 	boolean visited;

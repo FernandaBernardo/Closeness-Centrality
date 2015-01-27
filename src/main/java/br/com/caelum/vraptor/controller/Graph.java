@@ -16,9 +16,16 @@ public class Graph {
 	}
 	
 	public void connectVertex(int start,int end) {
+		addVertex(new Vertex(start));
+		addVertex(new Vertex(end));
+		
+		size=vertices.size();
 		if(adjMatrix == null) {
-			size=vertices.size();
 			adjMatrix=new int[size][size];
+		}
+		
+		if(adjMatrix.length != vertices.size()) {
+			adjMatrix = copyMatrix();
 		}
 		
 		int startIndex = indexOfId(start);
@@ -27,6 +34,16 @@ public class Graph {
 		adjMatrix[endIndex][startIndex]=1;
 	}
 	
+	private int[][] copyMatrix() {
+		int[][] auxAdjMatrix = new int[size][size];
+		for (int i = 0; i < adjMatrix.length; i++) {
+			for (int j = 0; j < adjMatrix.length; j++) {
+				auxAdjMatrix[i][j] = adjMatrix[i][j];
+			}
+		}
+		return auxAdjMatrix;
+	}
+
 	private int indexOfId(int start) {
 		for (Vertex v : vertices) {
 			if(v.getId() == start) return vertices.indexOf(v);
@@ -62,7 +79,7 @@ public class Graph {
 				Vertex child=null;
 				while((child=getUnvisitedChildVertex(n))!=null) {
 					child.visited=true;
-					distance[child.getId()] = distance[n.getId()]+1;
+					distance[indexOfId(child.getId())] = distance[indexOfId(n.getId())]+1;
 					printNode(child);
 					q.add(child);
 				}
@@ -101,7 +118,7 @@ public class Graph {
 		return vertices.get(id);
 	}
 	
-	public void addVertex(Vertex v) {
+	private void addVertex(Vertex v) {
 		if (!containsId(v.getId())) {
 			vertices.add(v);
 		}
@@ -116,9 +133,12 @@ public class Graph {
 		return false;
 	}
 
-	public void calculateCloseness() {
+	public List<Vertex> calculateCloseness() {
+		size = vertices.size();
 		bfs();
-		vertices.sort(new Comparator<Vertex>() {
+		List<Vertex> auxVertices = new ArrayList<Vertex>();
+		auxVertices = vertices.subList(0, size);
+		auxVertices.sort(new Comparator<Vertex>() {
 			@Override
 			public int compare(Vertex o1, Vertex o2) {
 				if(o1.getCloseness() > o2.getCloseness()) return -1;
@@ -126,5 +146,6 @@ public class Graph {
 				return 0;
 			}
 		});
+		return auxVertices;
 	}
 }
