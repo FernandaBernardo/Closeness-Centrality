@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Queue;
 
 public class Graph {
-	List<Vertex> vertices;
-	public int[][] adjMatrix;
-	int size;
+	private List<Vertex> vertices;
+	private int[][] adjMatrix;
+	private int size;
 	
 	public Graph() {
-		vertices = new ArrayList<Vertex>();
+		this.vertices = new ArrayList<Vertex>();
 	}
 	
 	public void connectVertex(int start,int end) {
@@ -55,7 +55,7 @@ public class Graph {
 		int index=indexOfId(v.getId());
 		int j=0;
 		while(j<size) {
-			if(adjMatrix[index][j]==1 && ((Vertex)vertices.get(j)).visited==false) {
+			if(adjMatrix[index][j]==1 && ((Vertex)vertices.get(j)).isVisited()==false) {
 				return (Vertex)vertices.get(j);
 			}
 			j++;
@@ -73,12 +73,12 @@ public class Graph {
 			distance[indexOfId(origin.getId())] = 0;
 			q.add(origin);
 			printNode(origin);
-			origin.visited=true;
+			origin.setVisited(true);
 			while(!q.isEmpty()) {
 				Vertex n=(Vertex)q.remove();
 				Vertex child=null;
 				while((child=getUnvisitedChildVertex(n))!=null) {
-					child.visited=true;
+					child.setVisited(true);
 					distance[indexOfId(child.getId())] = distance[indexOfId(n.getId())]+1;
 					printNode(child);
 					q.add(child);
@@ -101,7 +101,7 @@ public class Graph {
 		int i=0;
 		while(i<size) {
 			Vertex n=(Vertex)vertices.get(i);
-			n.visited=false;
+			n.setVisited(false);
 			i++;
 		}
 	}
@@ -133,12 +133,10 @@ public class Graph {
 		return false;
 	}
 
-	public List<Vertex> calculateCloseness() {
+	public void calculateCloseness() {
 		size = vertices.size();
 		bfs();
-		List<Vertex> auxVertices = new ArrayList<Vertex>();
-		auxVertices = vertices.subList(0, size);
-		auxVertices.sort(new Comparator<Vertex>() {
+		vertices.sort(new Comparator<Vertex>() {
 			@Override
 			public int compare(Vertex o1, Vertex o2) {
 				if(o1.getCloseness() > o2.getCloseness()) return -1;
@@ -146,6 +144,13 @@ public class Graph {
 				return 0;
 			}
 		});
-		return auxVertices;
+	}
+
+	public List<Vertex> getVertices() {
+		return vertices;
+	}
+
+	public void setVertices(List<Vertex> vertices) {
+		this.vertices = vertices;
 	}
 }

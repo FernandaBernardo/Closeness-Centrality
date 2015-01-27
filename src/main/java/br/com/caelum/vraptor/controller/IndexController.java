@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -19,13 +18,13 @@ import br.com.caelum.vraptor.view.Results;
 public class IndexController {
 	@Inject private Result result;
 	private Graph graph;
-	private String file = "/home/fernanda/workspace/graph/edges.txt";
+	private String file = System.getProperty("user.home") + "/workspace/graph/data/edges.txt";
 	
 	@Get("/")
 	public void index() throws FileNotFoundException {
 		graph = ParserText.parse(file);
-		List<Vertex> vertices = graph.calculateCloseness();
-		result.use(Results.json()).from(graph, "graph").recursive().serialize();
+		graph.calculateCloseness();
+		result.use(Results.json()).from(graph.getVertices(), "vertices").exclude("visited").serialize();
 	}
 	
 	@Post("/")

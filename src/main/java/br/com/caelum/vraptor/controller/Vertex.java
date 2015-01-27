@@ -5,12 +5,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Vertex {
 	private int id;	
-	boolean visited;
+	private boolean visited;
 	private double closeness;
 	
 	public Vertex(int id) {
 		this.setId(id);
-		visited = false;
+		setVisited(false);
 	}
 	
 	@Override
@@ -32,5 +32,13 @@ public class Vertex {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public boolean isVisited() {
+		return visited;
+	}
+
+	public void setVisited(boolean visited) {
+		this.visited = visited;
 	}
 }
